@@ -36,7 +36,7 @@ const generateSitemap = async (
 			if (err) throw err;
 		});
 	};
-	const filePath = sitemapPath || `${process.cwd}/test-data/sitemap.json`;
+	const filePath = sitemapPath || `./test-data/sitemap.json`;
 	const data = await getSitemap(url);
 	if (!fs.existsSync(filePath)) {
 		appendToSitemap(`{\n"urls":\n${JSON.stringify(data)}\n}`, filePath);
