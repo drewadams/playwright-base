@@ -11,7 +11,11 @@ const getSitemap = async (url: string): Promise<Array<string>> => {
 	const dataArray = data.split(/(?<=<loc>)(.*)(?=<\/loc>)/);
 	let finalData: Array<string> = [];
 	for (const rec of dataArray) {
-		if (rec.includes("https:") && !rec.includes("shopify")) {
+		if (
+			rec.includes("https:") &&
+			!rec.includes("shopify") &&
+			!rec.includes("uploads")
+		) {
 			finalData.push(rec);
 		}
 	}
