@@ -37,9 +37,6 @@ const lighthouseTest = base.extend<{}, { port: number; browser: Browser }>({
 });
 
 lighthouseTest.describe("Lighthouse", () => {
-	lighthouseTest.use({
-		storageState: "./test-data/secure/elephantscookies.json",
-	});
 	for (const url of urls) {
 		lighthouseTest(`Lighthouse test for ${url}`, async ({ page, port }) => {
 			page.on("dialog", async (dialog) => {
