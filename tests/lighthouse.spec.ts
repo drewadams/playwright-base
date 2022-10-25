@@ -39,10 +39,6 @@ const lighthouseTest = base.extend<{}, { port: number; browser: Browser }>({
 lighthouseTest.describe("Lighthouse", () => {
 	for (const url of urls) {
 		lighthouseTest(`Lighthouse test for ${url}`, async ({ page, port }) => {
-			page.on("dialog", async (dialog) => {
-				console.log(`Type: ${dialog.type()}`);
-				await dialog.dismiss();
-			});
 			await page.goto(url, { waitUntil: "load" });
 			const title = pathStripper(await page.title());
 			console.log(title);
