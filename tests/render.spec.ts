@@ -15,9 +15,8 @@ const viewports = [
 /**
  * This is a quick way to generate screenshots of a website for cross-browser manual verification.
  * They could be used for visual comparison as necessary.
- * Will need to create screenshot projects in config.
  * Saves files to /test-data/render-screenshots.
- * @example Screenshots Chrome, Screenshots iPhone
+ * Will need to create screenshot projects in config (hardcoded for Screenshots Safari, Screenshots Chrome project names.)
  */
 
 function renderScreenshots() {
