@@ -7,10 +7,10 @@ const accessibilityConfig = {
 };
 
 const defaultConfig = {
-	performance: 65,
+	performance: 80,
 	accessibility: 80,
 	"best-practices": 50,
-	seo: 50,
+	seo: 70,
 	pwa: 50,
 };
 

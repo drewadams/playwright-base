@@ -4,12 +4,12 @@ import fs from "fs";
 /**
  * This will get a sitemap and format it into an array of urls.
  * @param  {string} url - sitemap url
- * @returns {Promise<Array<string>>} Final Data - this is the final sitemap data
+ * @returns {Promise<string[]>} Final Data - this is the final sitemap data
  */
-const getSitemap = async (url: string): Promise<Array<string>> => {
+const getSitemap = async (url: string): Promise<string[]> => {
 	const { data } = await axios.get(url);
 	const dataArray = data.split(/(?<=<loc>)(.*)(?=<\/loc>)/);
-	let finalData: Array<string> = [];
+	let finalData: string[] = [];
 	for (const rec of dataArray) {
 		if (
 			rec.includes("https:") &&
