@@ -1,9 +1,5 @@
 import { test } from "@playwright/test";
 import pathStripper from "./helpers/pathStripper";
-/**
- * This is a quick way to generate screenshots of a website for cross-browser manual verification.
- * They could be used for visual comparison as necessary.
- */
 
 const data = []; // Fill with urls of pages to screenshot.
 
@@ -16,7 +12,15 @@ const viewports = [
 	{ width: 640, height: 1080, size: "sm" },
 ];
 
-function checkRender() {
+/**
+ * This is a quick way to generate screenshots of a website for cross-browser manual verification.
+ * They could be used for visual comparison as necessary.
+ * Will need to create screenshot projects in config.
+ * Saves files to /test-data/render-screenshots.
+ * @example Screenshots Chrome, Screenshots iPhone
+ */
+
+function renderScreenshots() {
 	for (const url of data) {
 		test(`Check ${url}`, async ({ page }, testInfo) => {
 			test.slow();
@@ -60,5 +64,5 @@ function checkRender() {
 }
 
 test.describe.parallel("Check render", () => {
-	checkRender();
+	renderScreenshots();
 });
