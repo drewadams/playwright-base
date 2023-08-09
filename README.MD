@@ -16,12 +16,11 @@ My basic stuff for a new playwright test repo
 npx playwright test
 ```
 
-### Some premade scripts, for ease of typing into terminal
+### Some premade scripts
 
 ```bash
  npm run test = "npx playwright test",
  npm run test:vis = "npx playwright test vis-comp",
  npm run test:lh = "npx playwright test lighthouse",
- npm run test:lighthouse = "npx playwright test lighthouse",
  npm run debug = "npx playwright test --debug"
 ```
