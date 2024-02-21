@@ -1,6 +1,6 @@
 # Playwright Base Template
 
-My basic stuff for a new playwright test repo
+My basic stuff for a new playwright test install
 
 ## Install
 
