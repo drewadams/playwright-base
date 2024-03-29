@@ -1,7 +1,12 @@
+# Node
 node_modules/
-/test-results/
-/playwright-report/
-/playwright/.cache/
 .env
-/test-data/secure
-/test-data/snapshots
+
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+test-data/secure
+test-data/snapshots
+reports/*/
+tests/suites/**/*.png

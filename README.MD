@@ -6,21 +6,16 @@ My basic stuff for a new playwright test install
 
 ```bash
  git clone <repo>
- npm install
+ yarn/npm/pnpm install
  npx install playwright
 ```
 
 ## To run tests
 
+All tests should be run from the top level directory.
+
 ```bash
 npx playwright test
 ```
 
-### Some premade scripts
-
-```bash
- npm run test = "npx playwright test",
- npm run test:vis = "npx playwright test vis-comp",
- npm run test:lh = "npx playwright test lighthouse",
- npm run debug = "npx playwright test --debug"
-```
+See package.json for helpful scripts.

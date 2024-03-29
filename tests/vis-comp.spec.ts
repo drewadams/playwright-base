@@ -1,28 +1,37 @@
-import { test, expect } from "@playwright/test";
-import { existsSync, readFileSync } from "fs";
-import { generateSitemap, getSitemap } from "./helpers/sitemapUtils";
-import pathStripper from "./helpers/pathStripper";
+import { expect, test } from "@playwright/test";
 
-const sitemapUrl = "<SITEMAP_URL>";
-const sitemapPath = pathStripper("<SITEMAP_PATH>");
-const previewTheme = "";
+import { config as dotenvConfig } from "dotenv";
+import pageData from "./test-data/pageData.json";
 
-test.describe("Visual Comparison", () => {
-	if (!existsSync(sitemapPath)) {
-		test("Gen sitemap", async () => {
-			await generateSitemap(sitemapUrl, sitemapPath);
-			test.fail();
-		});
-	}
+dotenvConfig();
 
-	test("Vis Comp", async ({ page }) => {
-		const data = JSON.parse(
-			readFileSync(sitemapPath, { encoding: "utf-8" })
-		).urls;
-		for (const url of data) {
-			await page.goto(url + previewTheme, { waitUntil: "networkidle" });
-			await page.keyboard.press("Escape");
-			expect(page).toHaveScreenshot({ maxDiffPixelRatio: 0.2 });
-		}
-	});
+const baseUrls = {
+  prod: "",
+  preprod: "",
+  qa: "",
+  dev: "",
+};
+
+test.use({
+  baseURL: baseUrls.qa,
+});
+
+pageData.map((page) => {
+  test(`${page.title} -  Visual Comparison`, async ({ browser }) => {
+    const context = await browser.newContext({
+      javaScriptEnabled: false,
+      httpCredentials: {
+        username: process.env.BASICAUTHUSERNAME!,
+        password: process.env.BASICAUTHPASS!,
+      },
+    });
+    const page = await context.newPage();
+    await page.goto(page.url + "?mtc_disable");
+    await page.keyboard.press("End");
+    await page.waitForTimeout(1000);
+    await expect(page).toHaveScreenshot({
+      fullPage: true,
+      maxDiffPixelRatio: 0.2,
+    });
+  });
 });

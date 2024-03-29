@@ -3,16 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:lh": "npx playwright test lighthouse.spec.ts",
+    "test": "npx playwright test",
+    "test:render": "npx playwright test --config=./tests/suites/render/render.config.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.26.0",
-    "axios": "^0.27.2",
-    "dotenv": "^16.0.2",
-    "get-port-please": "^2.6.1",
-    "lighthouse": "^9.6.7",
-    "playwright-lighthouse": "^2.2.2"
-  }
+    "@playwright/test": "^1.42.1",
+    "dotenv": "^16.4.1",
+    "get-port-please": "^3.1.2",
+    "lighthouse": "9.6.8",
+    "playwright-lighthouse": "2.2.2"
+  },
+  "dependencies": {}
 }
