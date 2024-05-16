@@ -6,7 +6,8 @@ node_modules/
 /test-results/
 /playwright-report/
 /playwright/.cache/
-/test-data/secure
-/test-data/snapshots
-/test-data/render-screenshots
+/tests/data/reports
+/tests/data/secure
+/tests/data/snapshots
+/tests/data/render-screenshots
 playwright.db

@@ -1,6 +1,4 @@
-import { getAllPages, openDb } from "./util/db";
-
-import { Page } from "./util/db/types";
+import { getAllPages } from "./util/db";
 import { TestBase as test } from "./fixtures/base";
 
 const pages = getAllPages();
