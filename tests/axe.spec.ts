@@ -13,7 +13,7 @@ test("Axe tools run", async ({ page }, testInfo) => {
       results: axeResults,
       options: {
         projectKey: "google",
-        outputDir: `./axe-report/${testInfo.project.name}`,
+        outputDir: `./tests/data/reports/${testInfo.project.name}`,
         reportFileName: "report.html",
       },
     });
