@@ -9,7 +9,7 @@ export default function pathStripper(
 	replacementChar: string = "-"
 ): string {
 	try {
-		return path.replace(/[/\\?%*:|"<>]/g, replacementChar);
+		return path.replace(/[\\?%*:|"<>]/g, replacementChar);
 	} catch (e) {
 		throw e;
 	}

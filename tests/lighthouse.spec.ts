@@ -1,60 +1,48 @@
-import { chromium } from "playwright";
 import type { Browser } from "playwright";
-import { playAudit } from "playwright-lighthouse";
-import { test as base } from "@playwright/test";
+import { TestBase as base } from "./fixtures/base";
+import { chromium } from "playwright";
+import { defaultConfig } from "./util/lighthouse/configs";
+import { getAllPages } from "./util/db";
 import { getPort } from "get-port-please";
-import fs from "fs";
-import {
-	accessibilityConfig,
-	defaultConfig,
-} from "./helpers/lighthouse/configs";
-import pathStripper from "./helpers/pathStripper";
-
-const path = "./test-data/test-urls.json";
-const urls = JSON.parse(fs.readFileSync(path, { encoding: "utf-8" })).urls;
+import { playAudit } from "playwright-lighthouse";
 
 const LHThresholdConfig = defaultConfig;
 
 const lighthouseTest = base.extend<{}, { port: number; browser: Browser }>({
-	port: [
-		async ({}, use) => {
-			// Assign a unique port for each playwright worker to support parallel tests
-			const port = await getPort();
-			await use(port);
-		},
-		{ scope: "worker" },
-	],
-
-	browser: [
-		async ({ port }, use) => {
-			const browser = await chromium.launch({
-				args: [`--remote-debugging-port=${port}`],
-			});
-			await use(browser);
-		},
-		{ scope: "worker" },
-	],
+  port: [
+    async ({}, use) => {
+      const port = await getPort();
+      await use(port);
+    },
+    { scope: "worker" },
+  ],
+  browser: [
+    async ({ port }, use) => {
+      const browser = await chromium.launch({
+        args: [`--remote-debugging-port=${port}`],
+      });
+      await use(browser);
+    },
+    { scope: "worker" },
+  ],
 });
 
-lighthouseTest.describe("Lighthouse", () => {
-	for (const url of urls) {
-		lighthouseTest(`Lighthouse test for ${url}`, async ({ page, port }) => {
-			await page.goto(url, { waitUntil: "load" });
-			const title = pathStripper(await page.title());
-			console.log(title);
-			await playAudit({
-				url: url,
-				reports: {
-					formats: {
-						html: true,
-					},
-					name: `${title}`,
-					directory: "./test-data/lighthouse",
-				},
-
-				thresholds: LHThresholdConfig,
-				port,
-			});
-		});
-	}
+lighthouseTest.use({ baseURL: "https://loveandcompany.com" });
+const pages = getAllPages();
+pages.map(async ({ url, title }) => {
+  lighthouseTest(`Lighthouse ${title}`, async ({ page, baseURL, port }) => {
+    await page.goto(baseURL + url);
+    await playAudit({
+      url: baseURL + url,
+      reports: {
+        formats: {
+          html: true,
+        },
+        name: title,
+        directory: "./tests/data/reports/lighthouse",
+      },
+      thresholds: LHThresholdConfig,
+      port,
+    });
+  });
 });
