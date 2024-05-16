@@ -1,6 +1,6 @@
 # Playwright Base Template
 
-Boilerplate for a Playwright test setup. Uses sqlite3 (better sqlite3) for test db. Spin up db with yarn run test:init-db
+Boilerplate for a Playwright test setup. Uses sqlite3 (better sqlite3) for test db. Spin up db with yarn run test:init
 
 ## Install
 
