@@ -1,12 +1,12 @@
 # Playwright Base Template
 
-My basic stuff for a new playwright test install
+Boilerplate for a Playwright test setup. Uses sqlite3 for test db. Spin up db with yarn run test:init-db
 
 ## Install
 
 ```bash
- git clone <repo>
- yarn/npm/pnpm install
+ git clone [repo]
+ yarn
  npx install playwright
 ```
 
@@ -15,7 +15,7 @@ My basic stuff for a new playwright test install
 All tests should be run from the top level directory.
 
 ```bash
-npx playwright test
+yarn test
 ```
 
-See package.json for helpful scripts.
+### Check package.json for premade scripts
